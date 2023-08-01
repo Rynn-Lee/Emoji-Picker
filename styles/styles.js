@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
   text: {
     position: 'fixed',
     top: '0px',
-    fontSize: '15pt',
+    // fontSize: '15pt',
     fontFamily: 'monospace',
     color: '#ffffff',
   },
@@ -32,14 +32,22 @@ export const styles = StyleSheet.create({
     paddingBottom: '10px',
     width: '70%',
     margin: '5px',
-    backgroundColor: '#fff',
-    borderRadius: '20px'
+    backgroundColor: '#202020',
+    // borderRadius: '20px',
+    color: '#fff'
+  },
+  buttonPrimary:{
+    backgroundColor: "#fff"
   },
   buttonText:{
-    textAlign: 'center',
+    textAlign: 'left',
+    color: "#fff"
+  },
+  buttonTextPrimary:{
+    textAlign: 'left',
     color: "#000"
   },
-  ButtonIcon:{
+  buttonIcon:{
     marginRight: '5px'
   }
 });
