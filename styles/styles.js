@@ -9,31 +9,30 @@ export const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   text: {
-    position: 'fixed',
-    top: '0px',
-    // fontSize: '15pt',
+    position: 'relative',
+    top: 0,
+    fontSize: 15,
     fontFamily: 'monospace',
     color: '#ffffff',
   },
   image:{
     backgroundColor: '#505050',
-    width: '80%',
-    height: '60%',
-    borderRadius: '20px'
+    width: '90%',
+    height: '80%',
+    borderRadius: 20
   },
   button:{
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: '10px',
-    paddingLeft: '20px',
-    paddingRight: '20px',
-    paddingBottom: '10px',
-    width: '70%',
-    margin: '5px',
+    paddingTop: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingBottom: 10,
+    margin: 5,
     backgroundColor: '#202020',
-    // borderRadius: '20px',
+    borderRadius: 20,
     color: '#fff'
   },
   buttonPrimary:{
@@ -45,9 +44,20 @@ export const styles = StyleSheet.create({
   },
   buttonTextPrimary:{
     textAlign: 'left',
-    color: "#000"
+    color: '#000'
   },
   buttonIcon:{
-    marginRight: '5px'
+    marginRight: 5
+  },
+  ButtonsBox:{
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  Horizontal:{
+    flexDirection: "row",
+    width: "80%",
+    overflow: "hidden"
   }
 });

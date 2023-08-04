@@ -1,4 +1,4 @@
-import { Image } from "react-native-web";
+import { Image } from "react-native";
 import { styles } from '../styles/styles';
 
 export function ImageViewer({image}){
