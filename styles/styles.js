@@ -6,7 +6,8 @@ export const styles = StyleSheet.create({
     flex: 1,
     color: '#fff',
     alignItems: 'center',
-    justifyContent: 'center'
+    height: '100%',
+    justifyContent: 'space-evenly'
   },
   text: {
     position: 'relative',
@@ -17,15 +18,14 @@ export const styles = StyleSheet.create({
   },
   image:{
     backgroundColor: '#505050',
-    width: '90%',
-    height: '80%',
+    objectFit: 'contain',
     borderRadius: 20
   },
   button:{
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
     paddingTop: 10,
     paddingLeft: 20,
     paddingRight: 20,
@@ -47,7 +47,10 @@ export const styles = StyleSheet.create({
     color: '#000'
   },
   buttonIcon:{
-    marginRight: 5
+    marginRight: 5,
+    padding: 5,
+    width: 'auto',
+    height: 'auto'
   },
   ButtonsBox:{
     width: "100%",
@@ -59,5 +62,55 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     width: "80%",
     overflow: "hidden"
+  },
+  modalContent: {
+    height: '25%',
+    width: '100%',
+    backgroundColor: '#25292e',
+    borderTopRightRadius: 18,
+    borderTopLeftRadius: 18,
+    position: 'absolute',
+    bottom: 0,
+  },
+  titleContainer: {
+    height: '16%',
+    backgroundColor: '#464C55',
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
+    paddingHorizontal: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  title: {
+    color: '#fff',
+    fontSize: 16,
+  },
+  pickerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 50,
+    paddingVertical: 20,
+  },
+  listContainer: {
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
+    paddingHorizontal: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  emojiImage: {
+    width: 100,
+    height: 100,
+    marginRight: 20,
+  },
+  sticker:{
+    position: 'absolute',
+    zIndex: 9999
+  },
+  absolute:{
+    position: 'absolute'
   }
 });
