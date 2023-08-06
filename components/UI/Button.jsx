@@ -1,5 +1,5 @@
 import { Pressable, Text } from "react-native";
-import { styles } from "../styles/styles";
+import { styles } from "../../styles/styles";
 import FontAwesome from "@expo/vector-icons/FontAwesome"
 
 export default function Button({label, fn, primary, ico}){

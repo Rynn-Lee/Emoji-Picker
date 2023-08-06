@@ -1,4 +1,4 @@
-import { styles } from "../styles/styles";
+import { styles } from "../../styles/styles";
 import { Modal, View, Text, Pressable } from 'react-native';
 import { MaterialIcons } from "@expo/vector-icons";
 

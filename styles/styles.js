@@ -3,11 +3,24 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   container: {
     backgroundColor: '#181818',
-    flex: 1,
     color: '#fff',
-    alignItems: 'center',
     height: '100%',
-    justifyContent: 'space-evenly'
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  Main:{
+    position: 'absolute',
+    marginTop: 50,
+    marginBottom: 45,
+    overflow: 'hidden'
+  },
+  TitleBar:{
+    position: 'absolute',
+    width: '100%',
+    backgroundColor: '#252525',
+    top: 0,
+    padding: 15
   },
   text: {
     position: 'relative',
@@ -17,9 +30,8 @@ export const styles = StyleSheet.create({
     color: '#ffffff',
   },
   image:{
-    backgroundColor: '#505050',
-    objectFit: 'contain',
-    borderRadius: 20
+    borderRadius: 20,
+    height: '100%',
   },
   button:{
     display: 'flex',
@@ -55,6 +67,7 @@ export const styles = StyleSheet.create({
   ButtonsBox:{
     width: "100%",
     display: "flex",
+    flexDirection: 'row',
     justifyContent: "center",
     alignItems: "center",
   },
@@ -66,7 +79,7 @@ export const styles = StyleSheet.create({
   modalContent: {
     height: '25%',
     width: '100%',
-    backgroundColor: '#25292e',
+    backgroundColor: '#252525dd',
     borderTopRightRadius: 18,
     borderTopLeftRadius: 18,
     position: 'absolute',
@@ -74,7 +87,7 @@ export const styles = StyleSheet.create({
   },
   titleContainer: {
     height: '16%',
-    backgroundColor: '#464C55',
+    backgroundColor: '#353535',
     borderTopRightRadius: 10,
     borderTopLeftRadius: 10,
     paddingHorizontal: 20,
@@ -108,9 +121,19 @@ export const styles = StyleSheet.create({
   },
   sticker:{
     position: 'absolute',
-    zIndex: 9999
+    zIndex: 99999999
   },
   absolute:{
     position: 'absolute'
+  },
+  ActionButtons:{
+    backgroundColor: '#252525',
+    width: '100%',
+    height: '20px',
+  },
+  Bottom:{
+    position: 'absolute',
+    bottom: 0,
+    width: '100%'
   }
 });

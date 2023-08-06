@@ -3,12 +3,16 @@ import { Text, View, Image, Pressable, Alert } from 'react-native';
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { styles } from './styles/styles';
 import * as ImagePicker from 'expo-image-picker'
-import { ImageViewer } from './components/ImageViewer';
-import Button from './components/Button';
-import { useState } from 'react';
-import EmojiPicker from './components/EmojiPicker';
-import EmojiList from './components/EmojiList';
-import EmojiSticker from './components/EmojiSticker';
+import { ImageViewer } from './components/UI/ImageViewer';
+import { useRef, useState } from 'react';
+import * as MediaLibrary from 'expo-media-library';
+import EmojiPicker from './components/Emoji/EmojiPicker';
+import EmojiList from './components/Emoji/EmojiList';
+import EmojiSticker from './components/Emoji/EmojiSticker';
+import ChooseImage from './components/ImageWork/ChooseImage';
+import ToolsImage from './components/ImageWork/ToolsImage';
+import { captureRef } from 'react-native-view-shot';
+import EditEmoji from './components/ImageWork/EditEmoji';
 
 const placeholderImage = require('./assets/Noa.png')
 
@@ -17,6 +21,10 @@ export default function App() {
   const [showAppOption, setShowAppOptions] = useState(false)
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [pickedEmoji, setPickedEmoji] = useState([])
+  const [emojiToEdit, setEmojiToEdit] = useState(null)
+  const [status, requestPermission] = MediaLibrary.usePermissions();
+  const imageRef = useRef();
+  !status && requestPermission()
 
   const pickImage = async() => {
     const result = await ImagePicker.launchImageLibraryAsync({
@@ -44,7 +52,7 @@ export default function App() {
       }
     ])
   }
-
+  const resetToDefaultImage = () => setPhoto(placeholderImage)
   const nextStep = () => setShowAppOptions(true)
   const prevStep = () => setShowAppOptions(false)
   const onReset = () => {
@@ -58,55 +66,60 @@ export default function App() {
     setIsModalVisible(false);
   };
   const onSaveImageAsync = async () => {
-
+    try{
+      const localUri = await captureRef(imageRef, {
+        height: 440,
+        quality: 1
+      })
+      await MediaLibrary.saveToLibraryAsync(localUri)
+      if(localUri){
+        alert("Your edit has been saved!")
+      }
+    }
+    catch(error){
+      console.error(error)
+    }
   }
   const addEmoji = (newEmoji) => {
     setPickedEmoji([...pickedEmoji, newEmoji])
-    console.log(pickedEmoji)
+    setEmojiToEdit(newEmoji)
   }
 
   const onRemove = (id) => {
-    const filter = pickedEmoji.filter((emoji) => emoji.id != id)
+    const filter = pickedEmoji.map((emoji) => emoji.id != id ? emoji : {})
     setPickedEmoji(filter)
+    setEmojiToEdit(null)
   }
 
   return (
     <GestureHandlerRootView style={styles.container}>
-      <Text style={styles.text}>Omega photo picker!</Text>
-      <ImageViewer image={photo}/>
-      {pickedEmoji !== null 
-      ? pickedEmoji.map((emoji, index) => <EmojiSticker imageSize={40} stickerSource={emoji} key={index} showConfirmDialog={showConfirmDialog} onRemove={onRemove}/>)
-      : null}
-      {
-        !showAppOption
-        ? 
-        <>
-        <View style={styles.ButtonsBox}>
-          <Button label={'Click to choose an image'} fn={pickImage} primary ico={"picture-o"}/>
-          <Button label={'Use this Image'} fn={nextStep}/>
+      <View style={styles.TitleBar}>
+        <Text style={styles.text}>Omega photo picker!</Text>
+      </View>
+      <View style={styles.Main}>
+        <View ref={imageRef} collapsable={false}>
+          <ImageViewer image={photo}/>
+          
+          {pickedEmoji
+          ? pickedEmoji.map((emoji, index) => <EmojiSticker imageSize={40} stickerSource={emoji} key={index} setEmojiToEdit={setEmojiToEdit} emojiToEdit={emojiToEdit}/>)
+          : null}
         </View>
-        </>
-        :
-        <>
-        <View style={[styles.ButtonsBox, styles.Horizontal]}>
-          <Button fn={()=>showConfirmDialog([()=>onReset(), ()=>prevStep()])} ico={"arrow-left"}/>
-          <Button ico={"rotate-left"} fn={()=>showConfirmDialog([()=>onReset()])}/>
-          <Button primary ico={"plus"} fn={onAddSticker}/>
-          <Button ico={"download"} fn={onSaveImageAsync}/>
-        </View>
-        </>
+      </View>
+      <View style={styles.Bottom}>
+
+      { !showAppOption
+        ? <ChooseImage pickImage={pickImage} nextStep={nextStep} resetToDefaultImage={resetToDefaultImage}/>
+        : !emojiToEdit
+          ? <ToolsImage showConfirmDialog={showConfirmDialog} onReset={onReset} prevStep={prevStep} onAddSticker={onAddSticker} onSaveImageAsync={onSaveImageAsync}/>
+          : <EditEmoji setEmojiToEdit={setEmojiToEdit} emojiToEdit={emojiToEdit} onRemove={onRemove}/>
       }
-      {
-        isModalVisible
-        ? 
-        <EmojiPicker
-        isVisible={isModalVisible}
-        onClose={onModalClose}
-        >
-          <EmojiList onSelect={addEmoji} onCloseModal={onModalClose}/>
-        </EmojiPicker>
-        :<></>
+
+      { isModalVisible
+        ? <EmojiPicker isVisible={isModalVisible} onClose={onModalClose}>
+            <EmojiList onSelect={addEmoji} onCloseModal={onModalClose}/>
+          </EmojiPicker> : <></>
       }
+      </View>
       <StatusBar style="auto" />
     </GestureHandlerRootView>
   );
