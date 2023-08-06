@@ -36,9 +36,6 @@ export default function App() {
       setShowAppOptions(true)
       setPhoto(result.assets[0])
     }
-    else{
-      alert("You haven't picked any photo")
-    }
   }
 
   const showConfirmDialog = (fn) => {
@@ -74,6 +71,9 @@ export default function App() {
       await MediaLibrary.saveToLibraryAsync(localUri)
       if(localUri){
         alert("Your edit has been saved!")
+        setPhoto({uri: localUri})
+        setPickedEmoji([])
+        prevStep()
       }
     }
     catch(error){
