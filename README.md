@@ -1,7 +1,7 @@
 ## 🤔 What's this project?
 This is a practice app<br>
 I wanted to check how Expo works and what does it provide<br>
-Is it better than just react native (spoilers, it's not)<br><br>
+Is it better than just react native (spoilers, it's not)<br>
 
 ## ❔ What's it about?
 This is an emoji picker app <br>
